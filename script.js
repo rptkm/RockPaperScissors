@@ -1,7 +1,16 @@
 
 let humanScore = 0
 let puterScore = 0
-let choice = prompt("Please enter your choice", "rock")
+
+const btnRock = document.getElementById("btn-rock")
+const btnPaper = document.getElementById("btn-paper")
+const btnScissors = document.getElementById("btn-scissors")
+const display = document.getElementById("displayDiv")
+const scoreDiv = document.getElementById("scoreDiv")
+
+btnRock.addEventListener("click", () => playRound("rock"))
+btnPaper.addEventListener("click", () => playRound("paper"))
+btnScissors.addEventListener("click", () => playRound("scissors"))
 
 function getComputerChoice(arg) {
     if (arg <= 0.33) {
@@ -11,42 +20,32 @@ function getComputerChoice(arg) {
     } else return "scissors"
 }
 
-function getPlayerChoice() {
-    choice = choice.toLowerCase()
-    if (choice != null) return choice
+function getPlayerChoice(arg) {
+    if (arg != null) return arg
 }
 
-function playRound() {
-    human = getPlayerChoice()
+function playRound(choice) {
+    display.textContent = ""
+    human = getPlayerChoice(choice)
     puter = getComputerChoice(Math.random())
-    console.log(`Computer chooses ${puter}`)
-    console.log(`Human chooses ${human}`)
+    display.textContent += `Computer chooses ${puter}. `
+    display.textContent += `Human chooses ${human}. `
 
     if (human == puter) {
-        console.log("Draw!")
+        display.textContent += "Draw!"
     }
     else if (human == "paper" && puter == "rock" || human == "scissors" && puter == "paper" || human == "rock" && puter == "scissors") {
         humanScore++
-        console.log("You win")
+        display.textContent += "You win!"
     }
     else {
         puterScore++
-        console.log("You lose!")
+        display.textContent += "You lose!"
     }
-    console.log()
+    scoreDiv.textContent = `Computer ${puterScore} vs ${humanScore} Human`
+    if (puterscore == 5 || humanScore == 5) {
+        btnPaper.style.visibility = "hidden"
+        btnRock.style.visibility = "hidden"
+        btnScissors.style.visibility = "hidden"
+    }
 }
-
-function playGame() {
-    playRound()
-    choice = prompt(`Computer ${puterScore} vs ${humanScore} Human. Next round!`,"paper")
-    playRound()
-    choice = prompt(`Computer ${puterScore} vs ${humanScore} Human. Next round!`,"scissors")
-    playRound()
-    choice = prompt(`Computer ${puterScore} vs ${humanScore} Human. Next round!`,"rock")
-    playRound()
-    choice = prompt(`Computer ${puterScore} vs ${humanScore} Human. Next round!`,"paper")
-    playRound()
-    console.log(`Computer ${puterScore} vs ${humanScore} Human. Game over!`)
-}
-
-playGame()
