@@ -43,9 +43,10 @@ function playRound(choice) {
         display.textContent += "You lose!"
     }
     scoreDiv.textContent = `Computer ${puterScore} vs ${humanScore} Human`
-    if (puterscore == 5 || humanScore == 5) {
+    if (puterScore == 5 || humanScore == 5) {
         btnPaper.style.visibility = "hidden"
         btnRock.style.visibility = "hidden"
         btnScissors.style.visibility = "hidden"
+        display.textContent = "Game over!"
     }
 }
